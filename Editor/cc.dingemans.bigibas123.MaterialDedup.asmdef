@@ -1,0 +1,12 @@
+{
+  "name": "cc.dingemans.bigibas123.MaterialDedup",
+  "references": [
+	"nadena.dev.ndmf",
+	"VRC.SDKBase.Editor"
+  ],
+  "precompiledReferences": [
+  ],
+  "includePlatforms": [
+	"Editor"
+  ]
+}
