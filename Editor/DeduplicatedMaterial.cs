@@ -43,6 +43,11 @@ namespace cc.dingemans.bigibas123.MaterialDedup
 
 		public void ApplyToDests()
 		{
+			if (_destinations.Count <= 1)
+			{
+				//Let the material be instead of replacing it
+				return;
+			}
 			var finalMaterial = Material;
 			foreach (var dest in _destinations)
 			{
