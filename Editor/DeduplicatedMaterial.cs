@@ -3,7 +3,7 @@ using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace cc.dingemans.bigibas123.MaterialDedup
+namespace cc.dingemans.bigibas123.MaterialDedup.Editor
 {
 	public class DeduplicatedMaterial
 	{

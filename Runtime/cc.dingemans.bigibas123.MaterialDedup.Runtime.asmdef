@@ -1,0 +1,16 @@
+{
+  "name": "cc.dingemans.bigibas123.MaterialDedup.Runtime",
+  "references": [
+	"nadena.dev.ndmf",
+	"VRC.SDKBase"
+  ],
+  "precompiledReferences": [
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

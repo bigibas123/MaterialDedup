@@ -1,15 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using cc.dingemans.bigibas123.MaterialDedup;
+using cc.dingemans.bigibas123.MaterialDedup.Editor;
+using cc.dingemans.bigibas123.MaterialDedup.Runtime;
 using nadena.dev.ndmf;
-using nadena.dev.ndmf.util;
-using UnityEditor;
 using UnityEngine;
 
 [assembly: ExportsPlugin(typeof(MaterialDedup))]
 
-namespace cc.dingemans.bigibas123.MaterialDedup
+namespace cc.dingemans.bigibas123.MaterialDedup.Editor
 {
 	public class MaterialDedup : Plugin<MaterialDedup>
 	{
@@ -24,23 +23,26 @@ namespace cc.dingemans.bigibas123.MaterialDedup
 				.BeforePlugin("com.anatawa12.avatar-optimizer")
 				.Run("Deduplicate materials", ctx =>
 				{
-					var avatar = ctx.AvatarRootTransform;
-					var materials = CollectMaterials(avatar);
-					var mappings = ResolveDeDups(materials);
-					RunDeduplication(mappings);
+					var roots = ctx.AvatarRootTransform.GetComponentsInChildren<MaterialDeduplicatorBehavior>();
+					foreach (var root in roots)
+					{
+						var materials = CollectMaterials(root.gameObject);
+						var mappings = ResolveDeDups(materials);
+						RunDeduplication(mappings);
+					}
 				});
 		}
 
-		private List<MaterialReference> CollectMaterials(Transform avatar)
+		private List<MaterialReference> CollectMaterials(GameObject root)
 		{
 			var materials = new List<MaterialReference>();
-			foreach (var smr in avatar.GetComponentsInChildren<SkinnedMeshRenderer>())
+			foreach (var smr in root.GetComponentsInChildren<SkinnedMeshRenderer>())
 			{
 				var mats = smr.sharedMaterials;
 				materials.AddRange(mats.Select((material, slot) => new MaterialReference(smr, slot)));
 			}
 
-			foreach (var mr in avatar.GetComponentsInChildren<MeshRenderer>())
+			foreach (var mr in root.GetComponentsInChildren<MeshRenderer>())
 			{
 				var mats = mr.sharedMaterials;
 				materials.AddRange(mats.Select((_, slot) => new MaterialReference(mr, slot)));
