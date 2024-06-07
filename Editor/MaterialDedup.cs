@@ -29,6 +29,7 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor
 						var materials = CollectMaterials(root.gameObject);
 						var mappings = ResolveDeDups(materials);
 						RunDeduplication(mappings);
+						UnityEngine.Object.DestroyImmediate(root);
 					}
 				});
 		}
