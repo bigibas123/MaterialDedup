@@ -7,8 +7,9 @@ namespace cc.dingemans.bigibas123.MaterialDedup
 {
 	public class DeduplicatedMaterial
 	{
-		private string _prefix = "Deduplicated_material_for:";
+		private string _prefix = "Dedup_";
 		private List<MaterialReference> _destinations;
+		private Material _original;
 		private Material _material;
 		[CanBeNull] private string _destName;
 
@@ -16,21 +17,22 @@ namespace cc.dingemans.bigibas123.MaterialDedup
 		{
 			get
 			{
-				_material.name = $"{_prefix}{DestName}";
+				_material.name = $"{Name}";
 				return _material;
 			}
 		}
 
-		public string DestName
+		public string Name
 		{
 			get
 			{
-				return _destName ??= string.Join("_", _destinations.Select((matRef) => matRef.DestinationName));
+				return _destName ??= $"{_prefix}{_original.name}:{string.Join("_", _destinations.Select((matRef) => matRef.DestinationName))}";
 			}
 		}
 		
 		public DeduplicatedMaterial(Material sourceMaterial)
 		{
+			_original = sourceMaterial;
 			_destinations = new List<MaterialReference>();
 			_material = new Material(sourceMaterial);
 		}

@@ -10,7 +10,7 @@ namespace cc.dingemans.bigibas123.MaterialDedup
 		public int Slot { get; }
 
 		public Material Material => Renderer.sharedMaterials[Slot];
-		public string DestinationName => $"{Renderer.gameObject.AvatarRootPath()}[{Slot}]";
+		public string DestinationName => $"{Renderer.gameObject.name}[{Slot}]";
 		[CanBeNull] public SkinnedMeshRenderer SkinnedMeshRenderer { get; private set; }
 		[CanBeNull] public MeshRenderer MeshRenderer { get; private set; }
 		
