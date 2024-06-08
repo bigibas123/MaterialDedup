@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
-using System.Text;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -8,9 +8,9 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
 {
 	public class DeduplicatedMaterial : MaterialContainer
 	{
-		private string _prefix = "Dedup_";
+		private string _prefix = "Dedup:";
 		private List<MaterialReference> _destinations;
-		private Material _original;
+		public ImmutableList<MaterialReference> Destinations => _destinations.ToImmutableList();
 		private Material _material;
 		[CanBeNull] private string _destName;
 
@@ -27,13 +27,12 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
 		{
 			get
 			{
-				return _destName ??= $"{_prefix}{_original.name}:{string.Join("_", _destinations.Select((matRef) => matRef.Name))}";
+				return _destName ??= $"{_prefix}{string.Join(";", _destinations.Select((matRef) => matRef.Name))}";
 			}
 		}
 		
 		public DeduplicatedMaterial(Material sourceMaterial)
 		{
-			_original = sourceMaterial;
 			_destinations = new List<MaterialReference>();
 			_material = new Material(sourceMaterial);
 		}

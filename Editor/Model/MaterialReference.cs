@@ -9,7 +9,7 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
 		public int Slot { get; }
 
 		public override Material Material => Renderer.sharedMaterials[Slot];
-		public override string Name => $"{Renderer.gameObject.name}[{Slot}]";
+		public override string Name => $"{(Material != null ? Material.name : $"{Renderer.gameObject.name}[{Slot}]")}";
 		[CanBeNull] public SkinnedMeshRenderer SkinnedMeshRenderer { get; private set; }
 		[CanBeNull] public MeshRenderer MeshRenderer { get; private set; }
 		

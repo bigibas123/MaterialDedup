@@ -13,34 +13,31 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor
 		public override VisualElement CreateInspectorGUI()
 		{
 			VisualElement inspector = new VisualElement();
-			foreach (var renderer in ((MaterialDeduplicatorBehavior)target).Renderers)
+			var list = ((MaterialDeduplicatorBehavior)target).AsMaterialRefs().AsDedupList().ToList();
+			
+			list.ForEach(dedup =>
 			{
 				var rendererFold = new Foldout
 				{
-					text = renderer.name,
+					text = dedup.Name,
 				};
-				var container = rendererFold.contentContainer;
-
-				var list = renderer.AsMaterialRefs().ToList();
-				var listView = new ListView(list,
-					makeItem: () => new GroupBox { focusable = false},
-					bindItem: (elem, i) =>
-					{
-						var matRef = list[i];
-						var gb = elem as GroupBox; 
-						var of = new ObjectField(){focusable = false, objectType = typeof(Material)};
-						of.label = matRef.Slot.ToString();
-						of.value = matRef.Material;
-						of.SetEnabled(false);
-						gb.contentContainer.Add(of);
-					}
-				);
-				container.Add(listView);
-
-
+				var gb = new GroupBox() { focusable = false };
+				gb.SetEnabled(false);
+				var of = new ObjectField() { focusable = false, objectType = typeof(Material) };
+				of.value = dedup.Material;
+				gb.contentContainer.Add(of);
+				foreach (var dest in dedup.Destinations)
+				{
+					var rendObjField = new ObjectField() { focusable = false, objectType = typeof(Renderer) };
+					rendObjField.label = dest.Slot.ToString();
+					rendObjField.value = dest.Renderer;
+					gb.contentContainer.Add(rendObjField);
+				}
+				rendererFold.contentContainer.Add(gb);
 				inspector.Add(rendererFold);
-			}
+			});
 
+			
 			return inspector;
 		}
 	}
