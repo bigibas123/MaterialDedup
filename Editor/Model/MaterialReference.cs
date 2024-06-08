@@ -1,16 +1,15 @@
 ﻿using BestHTTP.SecureProtocol.Org.BouncyCastle.Security;
 using JetBrains.Annotations;
-using nadena.dev.ndmf.util;
 using UnityEngine;
 
-namespace cc.dingemans.bigibas123.MaterialDedup
+namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
 {
-	public class MaterialReference
+	public class MaterialReference : MaterialContainer
 	{
 		public int Slot { get; }
 
-		public Material Material => Renderer.sharedMaterials[Slot];
-		public string DestinationName => $"{Renderer.gameObject.name}[{Slot}]";
+		public override Material Material => Renderer.sharedMaterials[Slot];
+		public override string Name => $"{Renderer.gameObject.name}[{Slot}]";
 		[CanBeNull] public SkinnedMeshRenderer SkinnedMeshRenderer { get; private set; }
 		[CanBeNull] public MeshRenderer MeshRenderer { get; private set; }
 		

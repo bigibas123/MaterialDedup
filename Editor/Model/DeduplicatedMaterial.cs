@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace cc.dingemans.bigibas123.MaterialDedup.Editor
+namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
 {
-	public class DeduplicatedMaterial
+	public class DeduplicatedMaterial : MaterialContainer
 	{
 		private string _prefix = "Dedup_";
 		private List<MaterialReference> _destinations;
@@ -13,7 +14,7 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor
 		private Material _material;
 		[CanBeNull] private string _destName;
 
-		public Material Material
+		public override Material Material
 		{
 			get
 			{
@@ -22,11 +23,11 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor
 			}
 		}
 
-		public string Name
+		public override string Name
 		{
 			get
 			{
-				return _destName ??= $"{_prefix}{_original.name}:{string.Join("_", _destinations.Select((matRef) => matRef.DestinationName))}";
+				return _destName ??= $"{_prefix}{_original.name}:{string.Join("_", _destinations.Select((matRef) => matRef.Name))}";
 			}
 		}
 		
