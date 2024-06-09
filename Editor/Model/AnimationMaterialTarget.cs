@@ -27,6 +27,7 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
 
 		public override void SetNewMat(Material mat)
 		{
+			//TODO check if this is destructive
 			var curve = AnimationUtility.GetObjectReferenceCurve(_clip, _binding);
 			curve[_keyFrameId].value = mat;
 			AnimationUtility.SetObjectReferenceCurve(_clip, _binding, curve);

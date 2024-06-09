@@ -2,7 +2,7 @@
   "name": "cc.dingemans.bigibas123.materialdedup",
   "displayName": "Material Deduplicator",
   "version": "0.0.0",
-  "license": "MIT",
+  "license": "LGPL-3.0-or-later",
   "author": {
     "name": "bigibas123"
   },
