@@ -19,10 +19,11 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor
 				.BeforePlugin("com.anatawa12.avatar-optimizer")
 				.Run("Deduplicate materials", ctx =>
 				{
-					var roots = ctx.AvatarRootTransform.GetComponentsInChildren<MaterialDeduplicatorBehavior>();
+					var roots = ctx.AvatarRootTransform.GetComponentsInChildren<MaterialDeduplicatorBehavior>(true);
 					foreach (var root in roots)
 					{
-						root.AsMaterialRefs(ctx.AvatarDescriptor).AsDedupList().ForEach(d => d.ApplyToDests(root.replaceEvenIfOnlyOne));
+						root.AsMaterialRefs(ctx.AvatarDescriptor).AsDedupList()
+							.ForEach(d => d.ApplyToDests(root.replaceEvenIfOnlyOne));
 						UnityEngine.Object.DestroyImmediate(root);
 					}
 				});

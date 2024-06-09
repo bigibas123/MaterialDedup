@@ -13,8 +13,8 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Runtime
 		private static List<Renderer> GetRenderers(GameObject root)
 		{
 			var renderers = new List<Renderer>();
-			renderers.AddRange(root.GetComponentsInChildren<SkinnedMeshRenderer>());
-			renderers.AddRange(root.GetComponentsInChildren<MeshRenderer>());
+			renderers.AddRange(root.GetComponentsInChildren<SkinnedMeshRenderer>(true));
+			renderers.AddRange(root.GetComponentsInChildren<MeshRenderer>(true));
 			return renderers;
 		}
 	}
