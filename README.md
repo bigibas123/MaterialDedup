@@ -11,6 +11,8 @@ Add the MaterialDeduplicator component to the root and it will run when you buil
 The component also displays a prediction for how it will try to deduplicate the materials
 This gets recalculated at build time due to other plugins making changes beforehand.
 
+[VCC](https://bigibas123.github.io/VCC/)
+
 ## Background
 This [ndmf](https://github.com/bdunderscore/ndmf) plugin is written as a replacement replicating the same functionality as [NdmfVRCFReorder](https://github.com/bigibas123/NdmfVRCFReorder)
 in a way that isn't dependent on a bunch of reflection.
