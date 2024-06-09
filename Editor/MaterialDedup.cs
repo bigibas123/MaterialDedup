@@ -22,7 +22,7 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor
 					var roots = ctx.AvatarRootTransform.GetComponentsInChildren<MaterialDeduplicatorBehavior>();
 					foreach (var root in roots)
 					{
-						root.AsMaterialRefs().AsDedupList().ForEach(d => d.ApplyToDests());
+						root.AsMaterialRefs(ctx.AvatarDescriptor).AsDedupList().ForEach(d => d.ApplyToDests(root.replaceEvenIfOnlyOne));
 						UnityEngine.Object.DestroyImmediate(root);
 					}
 				});

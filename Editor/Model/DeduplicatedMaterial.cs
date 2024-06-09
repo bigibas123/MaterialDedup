@@ -9,8 +9,10 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
 	public class DeduplicatedMaterial : MaterialContainer
 	{
 		private string _prefix = "Dedup:";
-		private List<MaterialReference> _destinations;
-		public ImmutableList<MaterialReference> Destinations => _destinations.ToImmutableList();
+		private List<MaterialTarget> _destinations;
+		public ImmutableList<MaterialTarget> Destinations => _destinations.ToImmutableList();
+		public int DestinationCount => _destinations.Count;
+		
 		private Material _material;
 		[CanBeNull] private string _destName;
 
@@ -33,27 +35,26 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
 		
 		public DeduplicatedMaterial(Material sourceMaterial)
 		{
-			_destinations = new List<MaterialReference>();
+			_destinations = new List<MaterialTarget>();
 			_material = new Material(sourceMaterial);
 		}
 		
-		public void AddRefForReplacement(MaterialReference avatarMat)
+		public void AddRefForReplacement(MaterialTarget avatarMat)
 		{
 			_destinations.Add(avatarMat);
 			_destName = null;
 		}
 
-		public void ApplyToDests()
+		public void ApplyToDests(bool bypassCountCheck = false)
 		{
-			if (_destinations.Count <= 1)
+			if (bypassCountCheck || DestinationCount > 1)
 			{
 				//Let the material be instead of replacing it
-				return;
-			}
-			var finalMaterial = Material;
-			foreach (var dest in _destinations)
-			{
-				dest.SetNewMat(finalMaterial);
+				var finalMaterial = Material;
+				foreach (var dest in _destinations)
+				{
+					dest.SetNewMat(finalMaterial);
+				}
 			}
 		}
 	}
