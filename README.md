@@ -1,5 +1,5 @@
 ﻿# MaterialDedup
-Scans the avatar for duplicate materials and replaces them with references to the same one.
+Scans the avatar for duplicate materials and replaces them with references to the same one, usefull if you're using [VRCFury](https://vrcfury.com/) together with [AvatarOptimizer's Merge Skinned Mesh](https://vpm.anatawa12.com/avatar-optimizer/en/docs/reference/merge-skinned-mesh/).
 Makes use of [ndmf](https://github.com/bdunderscore/ndmf), so all modifications are non-destructive.
 
 At the moment this plugin hasn't been extensively tested and thus has a version below 1.0,
