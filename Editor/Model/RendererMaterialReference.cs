@@ -29,8 +29,6 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
 
 		private Renderer _renderer;
 		
-
-		[CanBeNull]
 		private Renderer Renderer
 		{
 			get => _renderer;

@@ -11,9 +11,9 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Animation
 	{
 		public static IEnumerable<MaterialTarget> GetMaterialTargetFromAnimationLayers(this VRCAvatarDescriptor descriptor)
 		{
-			return descriptor.baseAnimationLayers.GetAnimationControllers()
-				.Concat(descriptor.specialAnimationLayers.GetAnimationControllers())
-				.SelectMany(cont => cont.GetAllMaterialRefrences());
+			return descriptor?.baseAnimationLayers?.GetAnimationControllers()
+				.Concat(descriptor?.specialAnimationLayers?.GetAnimationControllers())
+				.SelectMany(cont => cont.GetAllMaterialRefrences()) ?? new List<MaterialTarget>();
 		}
 
 		public static IEnumerable<MaterialTarget> GetAllMaterialRefrences(this RuntimeAnimatorController cont)

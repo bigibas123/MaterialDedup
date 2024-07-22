@@ -8,11 +8,15 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
 {
 	public class DeduplicatedMaterial : MaterialContainer
 	{
-		private string _prefix = "Dedup:";
+		private static readonly string _prefix = "Dedup:";
+
+		private static readonly (string find, string replace)[] _subStringReplacements =
+			{ ("VRCFury Material for ", "VRCF") };
+
 		private List<MaterialTarget> _destinations;
 		public ImmutableList<MaterialTarget> Destinations => _destinations.ToImmutableList();
 		public int DestinationCount => _destinations.Count;
-		
+
 		private Material _material;
 		[CanBeNull] private string _destName;
 
@@ -29,16 +33,32 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
 		{
 			get
 			{
-				return _destName ??= $"{_prefix}{string.Join(";", _destinations.Select((matRef) => matRef.Name))}";
+				if (_destName == null)
+				{
+					IEnumerable<string> matNames = _destinations
+							.Select(matRef => matRef.Name)
+							.Select(name =>
+								_subStringReplacements
+									.Aggregate(name,
+										(current, tup) =>
+											current
+												.Replace(tup.find, tup.replace)
+									)
+							)
+						;
+					_destName = $"{_prefix}{string.Join(";", matNames)}";
+				}
+
+				return _destName;
 			}
 		}
-		
+
 		public DeduplicatedMaterial(Material sourceMaterial)
 		{
 			_destinations = new List<MaterialTarget>();
 			_material = new Material(sourceMaterial);
 		}
-		
+
 		public void AddRefForReplacement(MaterialTarget avatarMat)
 		{
 			_destinations.Add(avatarMat);
