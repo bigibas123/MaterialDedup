@@ -15,6 +15,7 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Runtime
 			var renderers = new List<Renderer>();
 			renderers.AddRange(root.GetComponentsInChildren<SkinnedMeshRenderer>(true));
 			renderers.AddRange(root.GetComponentsInChildren<MeshRenderer>(true));
+			renderers.AddRange(root.GetComponentsInChildren<TrailRenderer>(true));
 			return renderers;
 		}
 	}

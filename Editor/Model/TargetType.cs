@@ -8,7 +8,8 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
 	{
 		Static,
 		Skinned,
-		AnimationClip
+		AnimationClip,
+		Trail
 	}
 
 	public static class TargetTypeExtensions

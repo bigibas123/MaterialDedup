@@ -39,6 +39,7 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
 				{
 					SkinnedMeshRenderer => TargetType.Skinned,
 					MeshRenderer => TargetType.Static,
+					TrailRenderer => TargetType.Trail,
 					_ => throw new InvalidParameterException(
 						"Did not provide skinned or static Mesh Renderer to MaterialReference: " + value)
 				};
@@ -51,6 +52,7 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
 			{
 				case TargetType.Static:
 				case TargetType.Skinned:
+				case TargetType.Trail:
 					var mats = Renderer.sharedMaterials;
 					mats[Slot.Value] = mat;
 					Renderer.sharedMaterials = mats;
