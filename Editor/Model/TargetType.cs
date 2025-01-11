@@ -6,27 +6,19 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
 {
 	public enum TargetType
 	{
-		Static,
-		Skinned,
+		Renderer,
 		AnimationClip,
-		Trail
 	}
 
 	public static class TargetTypeExtensions
 	{
 		public static TargetType GetTargetTypeFrom(this Type ob)
 		{
-			if (ob  == typeof(SkinnedMeshRenderer))
+			if (typeof(Renderer).IsAssignableFrom(ob))
 			{
-				return TargetType.Skinned;
+				return TargetType.Renderer;
 			}
-
-			if (ob == typeof(MeshRenderer))
-			{
-				return TargetType.Static;
-			}
-
-			if (ob == typeof(AnimationClip))
+			if (typeof(AnimationClip).IsAssignableFrom(ob))
 			{
 				return TargetType.AnimationClip;
 			}
@@ -51,8 +43,7 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
 		{
 			return tt switch
 			{
-				TargetType.Static => ob is MeshRenderer,
-				TargetType.Skinned => ob is SkinnedMeshRenderer,
+				TargetType.Renderer => ob is Renderer,
 				TargetType.AnimationClip => ob is AnimationClip,
 				_ => throw new ArgumentOutOfRangeException(nameof(tt), tt, "Enum not implemented")
 			};

@@ -12,21 +12,32 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Animation
 		public static IEnumerable<MaterialTarget> GetMaterialTargetFromAnimationLayers(
 			this VRCAvatarDescriptor descriptor)
 		{
-			return descriptor?.baseAnimationLayers?.GetAnimationControllers()
-				.Concat(descriptor?.specialAnimationLayers?.GetAnimationControllers())
-				.SelectMany(cont => cont.GetAllMaterialRefrences()) ?? new List<MaterialTarget>();
+			if (descriptor)
+			{
+				return descriptor.baseAnimationLayers.GetAnimationControllers()
+					.Concat(descriptor.specialAnimationLayers.GetAnimationControllers())
+					.SelectMany(cont => cont.GetAllMaterialRefrences());
+			}
+
+			return new List<MaterialTarget>(0);
 		}
 
 		public static IEnumerable<MaterialTarget> GetAllMaterialRefrences(this RuntimeAnimatorController cont)
 		{
-			return cont.animationClips
+			if (cont)
+			{
+				return cont.animationClips
 					.SelectMany(clip => AnimationUtility.GetObjectReferenceCurveBindings(clip)
 						.Where(binding => binding.type.IsTargetTypeSupported())
 						.Where(binding => binding.propertyName.StartsWith("m_Materials.Array"))
 						.SelectMany(binding => binding.GetMaterialsFromBinding(clip)
 						)
-					)
-				;
+					);
+			}
+
+			return new List<MaterialTarget>(0);
+
+			;
 		}
 
 		public static IEnumerable<MaterialTarget> GetMaterialsFromBinding(this EditorCurveBinding binding,

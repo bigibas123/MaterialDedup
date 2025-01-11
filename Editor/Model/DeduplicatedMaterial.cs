@@ -69,6 +69,16 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
 		{
 			if (bypassCountCheck || DestinationCount > 1)
 			{
+				if (!bypassCountCheck)
+				{
+					var first = _destinations.First().Material;
+					var allSame = _destinations.All(mat => mat.Material == first);
+					if (allSame)
+					{
+						return;
+					}
+				}
+
 				//Let the material be instead of replacing it
 				var finalMaterial = Material;
 				foreach (var dest in _destinations)

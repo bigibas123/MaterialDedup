@@ -1,6 +1,4 @@
 ﻿using System;
-using BestHTTP.SecureProtocol.Org.BouncyCastle.Security;
-using JetBrains.Annotations;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -8,10 +6,22 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
 {
 	public class RendererMaterialReference : MaterialTarget
 	{
-		public override Material Material => (Renderer != null && Slot.HasValue) ? Renderer.sharedMaterials[Slot.Value] : null;
-		public override string Name => $"{(Material != null ? Material.name : $"{Renderer.gameObject.name}[{Slot}]")}";
-		
-		private int? Slot { get; }
+		public override Material Material => (Renderer != null) ? Renderer.sharedMaterials[Slot] : null;
+
+		public override string Name
+		{
+			get
+			{
+				var s = $"{Renderer.gameObject.name}[{Slot}";
+				if (Material != null)
+				{
+					s += $"->{Material.name}";
+				}
+				return s + "]";
+			}
+		}
+
+		private int Slot { get; }
 
 		public RendererMaterialReference(Renderer renderer, int slot)
 		{
@@ -20,6 +30,7 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
 		}
 
 		private TargetType _type;
+
 		public override TargetType Type
 		{
 			get => _type;
@@ -28,21 +39,14 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
 		public override Object Target => Renderer;
 
 		private Renderer _renderer;
-		
+
 		private Renderer Renderer
 		{
 			get => _renderer;
 			set
 			{
 				_renderer = value;
-				_type = value switch
-				{
-					SkinnedMeshRenderer => TargetType.Skinned,
-					MeshRenderer => TargetType.Static,
-					TrailRenderer => TargetType.Trail,
-					_ => throw new InvalidParameterException(
-						"Did not provide skinned or static Mesh Renderer to MaterialReference: " + value)
-				};
+				_type = value.GetType().GetTargetTypeFrom();
 			}
 		}
 
@@ -50,15 +54,13 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
 		{
 			switch (Type)
 			{
-				case TargetType.Static:
-				case TargetType.Skinned:
-				case TargetType.Trail:
+				case TargetType.Renderer:
 					var mats = Renderer.sharedMaterials;
-					mats[Slot.Value] = mat;
+					mats[Slot] = mat;
 					Renderer.sharedMaterials = mats;
 					break;
 				default:
-					throw new ArgumentOutOfRangeException("type",Type,"Type not implemented");
+					throw new ArgumentOutOfRangeException("type", Type, "Type not implemented");
 			}
 		}
 	}
