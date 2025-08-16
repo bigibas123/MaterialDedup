@@ -2,7 +2,7 @@
 
 Version 3, 29 June 2007
 
-Copyright (C) 2024 bigibas123.
+Copyright (C) 2025 bigibas123.
 
 Everyone is permitted to copy and distribute verbatim copies of this
 license document, but changing it is not allowed.

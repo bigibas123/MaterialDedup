@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using cc.dingemans.bigibas123.MaterialDedup.Editor.Animation;
-using cc.dingemans.bigibas123.MaterialDedup.Editor.Model;
-using cc.dingemans.bigibas123.MaterialDedup.Runtime;
+using cc.dingemans.bigibas123.materialdedup.Editor.Animation;
+using cc.dingemans.bigibas123.materialdedup.Editor.Model;
+using cc.dingemans.bigibas123.materialdedup.Runtime;
 using UnityEngine;
 using VRC.SDK3.Avatars.Components;
 
-namespace cc.dingemans.bigibas123.MaterialDedup.Editor
+namespace cc.dingemans.bigibas123.materialdedup.Editor
 {
 	public static class MatSlotExtensions
 	{
@@ -18,6 +18,15 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor
 			IEnumerable<MaterialTarget> animationLayerMats =
 				contextAvatarDescriptor.GetMaterialTargetFromAnimationLayers();
 			return rendererMaterials.Concat(animationLayerMats);
+		}
+
+		public static IEnumerable<MaterialTarget> AsMaterialRefs(this GameObject root)
+		{
+			var renderers = new List<Renderer>();
+			renderers.AddRange(root.GetComponentsInChildren<SkinnedMeshRenderer>(true));
+			renderers.AddRange(root.GetComponentsInChildren<MeshRenderer>(true));
+			renderers.AddRange(root.GetComponentsInChildren<TrailRenderer>(true));
+			return renderers.AsMaterialRefs();
 		}
 
 		public static IEnumerable<RendererMaterialReference> AsMaterialRefs(this IEnumerable<Renderer> renders) =>

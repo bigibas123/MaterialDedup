@@ -1,5 +1,6 @@
 {
-  "name": "cc.dingemans.bigibas123.MaterialDedup.Runtime",
+  "name": "cc.dingemans.bigibas123.materialdedup.Runtime",
+  "rootNamespace": "cc.dingemans.bigibas123.materialdedup.Runtime",
   "references": [
 	"nadena.dev.ndmf",
 	"VRC.SDKBase"

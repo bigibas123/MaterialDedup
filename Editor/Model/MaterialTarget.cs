@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
+namespace cc.dingemans.bigibas123.materialdedup.Editor.Model
 {
 	public abstract class MaterialTarget : MaterialContainer
 	{

@@ -1,9 +1,11 @@
 {
-  "name": "cc.dingemans.bigibas123.MaterialDedup.Editor",
+  "name": "cc.dingemans.bigibas123.materialdedup.Editor",
+  "rootNamespace": "cc.dingemans.bigibas123.materialdedup.Editor",
   "references": [
 	"nadena.dev.ndmf",
+    "nadena.dev.ndmf.vrchat",
 	"VRC.SDKBase.Editor",
-	"cc.dingemans.bigibas123.MaterialDedup.Runtime"
+	"cc.dingemans.bigibas123.materialdedup.Runtime"
   ],
   "precompiledReferences": [
   ],

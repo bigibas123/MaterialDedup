@@ -2,7 +2,7 @@
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
+namespace cc.dingemans.bigibas123.materialdedup.Editor.Model
 {
 	public class RendererMaterialReference : MaterialTarget
 	{
@@ -21,7 +21,7 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
 			}
 		}
 
-		private int Slot { get; }
+		public int Slot { get; }
 
 		public RendererMaterialReference(Renderer renderer, int slot)
 		{

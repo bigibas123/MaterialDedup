@@ -1,10 +1,11 @@
-using cc.dingemans.bigibas123.MaterialDedup.Editor;
-using cc.dingemans.bigibas123.MaterialDedup.Runtime;
+using cc.dingemans.bigibas123.materialdedup.Editor;
+using cc.dingemans.bigibas123.materialdedup.Runtime;
 using nadena.dev.ndmf;
+using nadena.dev.ndmf.vrchat;
 
 [assembly: ExportsPlugin(typeof(MaterialDedup))]
 
-namespace cc.dingemans.bigibas123.MaterialDedup.Editor
+namespace cc.dingemans.bigibas123.materialdedup.Editor
 {
 	public class MaterialDedup : Plugin<MaterialDedup>
 	{
@@ -22,7 +23,7 @@ namespace cc.dingemans.bigibas123.MaterialDedup.Editor
 					var roots = ctx.AvatarRootTransform.GetComponentsInChildren<MaterialDeduplicatorBehavior>(true);
 					foreach (var root in roots)
 					{
-						root.AsMaterialRefs(ctx.AvatarDescriptor).AsDedupList()
+						root.AsMaterialRefs(ctx.VRChatAvatarDescriptor()).AsDedupList()
 							.ForEach(d => d.ApplyToDests(root.replaceEvenIfOnlyOne));
 						UnityEngine.Object.DestroyImmediate(root);
 					}

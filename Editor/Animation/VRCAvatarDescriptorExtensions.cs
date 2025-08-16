@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using cc.dingemans.bigibas123.MaterialDedup.Editor.Model;
+using cc.dingemans.bigibas123.materialdedup.Editor.Model;
 using UnityEditor;
 using UnityEngine;
 using VRC.SDK3.Avatars.Components;
 
-namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Animation
+namespace cc.dingemans.bigibas123.materialdedup.Editor.Animation
 {
 	public static class VRCAvatarDescriptorExtensions
 	{

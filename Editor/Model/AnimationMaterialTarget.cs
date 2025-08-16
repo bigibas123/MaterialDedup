@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
+namespace cc.dingemans.bigibas123.materialdedup.Editor.Model
 {
 	public class AnimationMaterialTarget : MaterialTarget
 	{

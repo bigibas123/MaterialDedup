@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using cc.dingemans.bigibas123.MaterialDedup.Editor.Model;
-using cc.dingemans.bigibas123.MaterialDedup.Runtime;
+using cc.dingemans.bigibas123.materialdedup.Editor.Model;
+using cc.dingemans.bigibas123.materialdedup.Runtime;
 using JetBrains.Annotations;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
-using VRC;
 using VRC.SDK3.Avatars.Components;
 
-namespace cc.dingemans.bigibas123.MaterialDedup.Editor
+namespace cc.dingemans.bigibas123.materialdedup.Editor
 {
 	[CustomEditor(typeof(MaterialDeduplicatorBehavior))]
 	public class MaterialDeduplicatorBehaviorEditor : UnityEditor.Editor

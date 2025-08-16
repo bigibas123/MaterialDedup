@@ -2,7 +2,7 @@
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace cc.dingemans.bigibas123.MaterialDedup.Runtime
+namespace cc.dingemans.bigibas123.materialdedup.Runtime
 {
 	[AddComponentMenu("MaterialDeduplicator")]
 	public class MaterialDeduplicatorBehavior : MonoBehaviour, IEditorOnly

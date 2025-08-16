@@ -2,7 +2,7 @@
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace cc.dingemans.bigibas123.MaterialDedup.Editor.Model
+namespace cc.dingemans.bigibas123.materialdedup.Editor.Model
 {
 	public enum TargetType
 	{
