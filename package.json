@@ -3,8 +3,10 @@
   "displayName": "Material Deduplicator",
   "version": "2.0.0",
   "license": "LGPL-3.0-or-later",
+  "licensesUrl": "https://spdx.org/licenses/LGPL-3.0-or-later.html",
   "author": {
-    "name": "bigibas123"
+    "name": "bigibas123",
+    "url": "https://github.com/bigibas123/"
   },
   "unity": "2022.3",
   "description": "NDMF plugin for deduplicating materials on your avatar",
