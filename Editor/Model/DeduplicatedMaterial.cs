@@ -2,6 +2,7 @@
 using System.Collections.Immutable;
 using System.Linq;
 using JetBrains.Annotations;
+using nadena.dev.ndmf;
 using UnityEngine;
 
 namespace cc.dingemans.bigibas123.materialdedup.Editor.Model
@@ -65,7 +66,7 @@ namespace cc.dingemans.bigibas123.materialdedup.Editor.Model
 			_destName = null;
 		}
 
-		public void ApplyToDests(bool bypassCountCheck = false)
+		public void ApplyToDests(bool bypassCountCheck = false, IAssetSaver contextAssetSaver = null)
 		{
 			if (bypassCountCheck || DestinationCount > 1)
 			{
@@ -84,6 +85,11 @@ namespace cc.dingemans.bigibas123.materialdedup.Editor.Model
 				foreach (var dest in _destinations)
 				{
 					dest.SetNewMat(finalMaterial);
+				}
+
+				if (contextAssetSaver != null)
+				{
+					contextAssetSaver.SaveAsset(finalMaterial);
 				}
 			}
 		}

@@ -24,7 +24,7 @@ namespace cc.dingemans.bigibas123.materialdedup.Editor
 					foreach (var root in roots)
 					{
 						root.AsMaterialRefs(ctx.VRChatAvatarDescriptor()).AsDedupList()
-							.ForEach(d => d.ApplyToDests(root.replaceEvenIfOnlyOne));
+							.ForEach(d => d.ApplyToDests(root.replaceEvenIfOnlyOne, ctx.AssetSaver));
 						UnityEngine.Object.DestroyImmediate(root);
 					}
 				});
